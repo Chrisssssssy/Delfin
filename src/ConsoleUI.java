@@ -16,9 +16,6 @@ public class ConsoleUI {
         }
     }
 
-
-
-
     private void showMenu (){
         IO.println();
         IO.println("1. registrer medlem");
