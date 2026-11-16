@@ -1,3 +1,5 @@
-void main() {
-    
+public class ConsoleUI {
+
 }
+
+
