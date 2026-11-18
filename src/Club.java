@@ -14,7 +14,4 @@ public class Club {
     public ArrayList<Member> getMembers() {
         return members;
     }
-
-    public void createMember() {
-    }
 }
