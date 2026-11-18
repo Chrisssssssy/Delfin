@@ -4,22 +4,45 @@ public class Member {
   private int memberID;
   private String swimmingStyle;
   private String swimmingLevel;
+  private MembershipStatus status;
 
 
-  public Member(String name, int age, int memberID, String swimmingStyle, String swimmingLevel){
+  public Member(String name, int age, int memberID, String swimmingStyle, String swimmingLevel, MembershipStatus status){
       this.name = name;
       this.age = age;
       this.memberID = memberID;
       this.swimmingStyle = swimmingStyle;
       this.swimmingLevel = swimmingLevel;
+      this.status = status;
 
   }
-public String toString(){
-      return String.format("""
-              Navn: %s
-              Alder: %d
-              Medlemsnummer: %d
-              Svømmestil: %s
-              Svømmeniveau: %s""", name, age, memberID, swimmingStyle, swimmingLevel);
-}
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public int getMemberID() {
+        return memberID;
+    }
+
+    public String getSwimmingStyle() {
+        return swimmingStyle;
+    }
+
+    public String getSwimmingLevel() {
+        return swimmingLevel;
+    }
+
+    public MembershipStatus getStatus() {
+      return status;
+    }
+
+    public void setStatus(MembershipStatus status) {
+      this.status = status;
+    }
+
 }
