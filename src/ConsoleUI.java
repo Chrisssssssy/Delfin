@@ -1,4 +1,9 @@
 public class ConsoleUI {
+    Club club;
+
+    public ConsoleUI(Club club){
+        this.club = club;
+    }
 
     public void run (){
         boolean running = true;
@@ -52,6 +57,10 @@ public class ConsoleUI {
     }
 
     private void createMember() {
+        club.createMember();
+
+
+
     }
 
     private void showMember() {
