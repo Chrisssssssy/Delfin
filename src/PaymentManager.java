@@ -8,7 +8,7 @@ public class PaymentManager {
         List<Member> paidMembers = new ArrayList<>();
 
         for (Member member : members) {
-            if (member.hasPaid()) {
+            if (member.getHasPaid()) {
                 paidMembers.add(member);
             }
         }
@@ -21,12 +21,37 @@ public class PaymentManager {
         List<Member> unpaidMembers = new ArrayList<>();
 
         for (Member member : members) {
-            if (!member.hasPaid()) {
+            if (!member.getHasPaid()) {
                 unpaidMembers.add(member);
             }
         }
 
         return unpaidMembers;
+    }
+
+    public int calculateFee(int age, MembershipStatus status) {
+        if (status == MembershipStatus.PASSIVE) {
+            return 500;
+        }
+        if (status == MembershipStatus.ACTIVE) {
+
+            if (age < 18) {
+                return 1000;
+            }
+            if (age > 60) {
+                return 1200;
+            }
+        }
+        return 1600;
+    }
+
+    public int calculateTotal(List<Integer> fees) {
+        int total = 0;
+
+
+
+
+        return total;
     }
 
 }

@@ -4,6 +4,7 @@ public class Member {
     private int memberID;
     private String swimmingStyle;
     private String swimmingLevel;
+    private boolean hasPaid;
 
 
     public Member(String name, int age, int memberID, String swimmingStyle, String swimmingLevel){
@@ -12,6 +13,7 @@ public class Member {
         this.memberID = memberID;
         this.swimmingStyle = swimmingStyle;
         this.swimmingLevel = swimmingLevel;
+        this.hasPaid = hasPaid;
 
     }
     public String toString(){
@@ -21,5 +23,8 @@ public class Member {
               Medlemsnummer: %d
               Svømmestil: %s
               Svømmeniveau: %s""", name, age, memberID, swimmingStyle, swimmingLevel);
+    }
+    public boolean getHasPaid() {
+        return hasPaid;
     }
 }
