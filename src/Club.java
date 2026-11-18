@@ -1,13 +1,20 @@
-import java.lang.reflect.Member;
 import java.util.ArrayList;
 
 public class Club {
     private ArrayList<Member>members = new ArrayList<>();
-    private int ID = 1;
+    private int nextMemberID = 1;
 
-    public class createMember (String Name, int age, int memberID, String swimmingStyle, String swimmingLevel){
-
+    public Member createMember (String name, int age, String swimmingStyle, String swimmingLevel){
+        Member member = new Member(name, age, nextMemberID, swimmingStyle, swimmingLevel);
+        nextMemberID++;
+        members.add(member);
+        return member;
     }
 
+    public ArrayList<Member> getMembers() {
+        return members;
+    }
 
+    public void createMember() {
+    }
 }
