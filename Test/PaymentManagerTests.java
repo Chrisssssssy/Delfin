@@ -1,5 +1,8 @@
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PaymentManagerTests {
@@ -72,5 +75,37 @@ public class PaymentManagerTests {
 
         //Assert
         assertEquals(500, result);
+    }
+    @Test
+    void testCalculateTotalWithThreeMembers() {
+        //Arrange
+        PaymentManager calculator = new PaymentManager();
+        Member member1 = new Member("Hans", 17, 13,
+                "Bryst", "Junior", MembershipStatus.ACTIVE, true);
+        Member member2 = new Member("Kirsten", 35, 11,
+                "Slow", "Adult", MembershipStatus.ACTIVE, true);
+        Member member3 = new Member("Niels", 70, 12,
+                "Bryst", "Old Boys", MembershipStatus.PASSIVE, true);
+
+        List<Member> members = new ArrayList<>(List.of(member1, member2, member3));
+
+        //Act
+        int result = calculator.calculateTotal(members);
+
+        //Assert
+        assertEquals(3100, result);
+    }
+    @Test
+    void testCalculateTotalWithNoMembers() {
+        //Arrange
+        PaymentManager calculator = new PaymentManager();
+
+        List<Member> members = new ArrayList<>(List.of());
+
+        //Act
+        int result = calculator.calculateTotal(members);
+
+        //Assert
+        assertEquals(0, result);
     }
 }

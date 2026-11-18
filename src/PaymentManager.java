@@ -30,6 +30,7 @@ public class PaymentManager {
     }
 
     public int calculateFee(int age, MembershipStatus status) {
+
         if (status == MembershipStatus.PASSIVE) {
             return 500;
         }
@@ -45,11 +46,16 @@ public class PaymentManager {
         return 1600;
     }
 
-    public int calculateTotal(List<Integer> fees) {
+    public int calculateTotal(List<Member> members) {
         int total = 0;
 
-        for (Integer sum : fees) {
-            total += sum;
+        for (Member member : members) {
+            int age = member.getAge();
+            MembershipStatus status = member.getStatus();
+
+            int fee = calculateFee(age, status);
+
+            total += fee;
         }
 
         return total;
