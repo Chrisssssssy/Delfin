@@ -48,8 +48,9 @@ public class PaymentManager {
     public int calculateTotal(List<Integer> fees) {
         int total = 0;
 
-
-
+        for (Integer sum : fees) {
+            total += sum;
+        }
 
         return total;
     }
