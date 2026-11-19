@@ -57,7 +57,9 @@ public class ConsoleUI {
     }
 
     private void createMember() {
-        club.createMember();
+//        club.createMember(){
+//            String
+
 
 
 
