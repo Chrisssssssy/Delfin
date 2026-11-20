@@ -14,6 +14,23 @@ public class Member {
       this.swimmingLevel = swimmingLevel;
 
   }
+
+public boolean isJunior(){
+      return age < 18;
+}
+
+public String getName() {
+      return name;
+  }
+
+    public int getAge() {
+      return age;
+  }
+
+    public int getMemberID() {
+      return memberID;
+  }
+
 public String toString(){
       return String.format("""
               Navn: %s
