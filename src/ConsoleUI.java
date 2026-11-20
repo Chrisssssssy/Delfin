@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class ConsoleUI {
     Club club;
 
@@ -122,6 +124,12 @@ public class ConsoleUI {
     }
 
     private void showExpectedIncome() {
+        PaymentManager expected = new PaymentManager();
+        List<Member> members = club.getMembers();
+
+        int result = expected.calculateTotal(members);
+
+        IO.println("Samlede forventet kontigentindtægt " + result + " kr.");
     }
 
     public void TrænerMenu (){
