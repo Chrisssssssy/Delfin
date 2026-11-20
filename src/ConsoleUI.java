@@ -60,22 +60,29 @@ public class ConsoleUI {
         String name = IO.readln("navn;");
         int age = Integer.parseInt(IO.readln("Alder: "));
 
+        String swimmingStyle = IO.readln("Svømmestil: ");
+        String swimmingLevel = IO.readln("Svømmeniveau: ");
 
+        //Fra Enums?
+//        MembershipStatus status = MembershipStatus.valueOf(
+//                IO.readln("Medlemskab aktiv/passivt").trim().toUpperCase());
+//
+//        SwimmerType type = SwimmerType.valueOf(
+//                IO.readln("MOTIONIST/KONKURRENCE").trim().toUpperCase());
 
-
-
-
-
-
-
-
-
-
-
-
+        Member member = club.createMember(name, age, swimmingStyle, swimmingLevel);
+        IO.println("\nMedlem oprettet:\n" + member);
     }
 
     private void showMember() {
+        if (club.getMembers().isEmpty()){
+            IO.println();
+        }
+
+        for (Member member : club.getMembers()){
+            IO.println(member);
+        }
+
     }
 
     private void DeleteMember() {
@@ -86,6 +93,9 @@ public class ConsoleUI {
             IO.println("Der findes intet medlem med nummer " + id);
             return;
         }
+
+        club.deleteMember(id);
+        IO.println("Medlemmet er slettet:\n" + member);
     }
 
     public void KassererMenu(){
