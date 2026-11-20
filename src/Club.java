@@ -11,6 +11,20 @@ public class Club {
         return member;
     }
 
+    public Member findMember(int memberID) {
+        for (Member member : members) {
+            if (member.getMemberID() == memberID) {
+                return member;
+            }
+        }
+        return null;
+    }
+
+    public boolean deleteMember(int memberID) {
+        return members.removeIf(member -> member.getMemberID() == memberID);
+    }
+
+
     public ArrayList<Member> getMembers() {
         return members;
     }
