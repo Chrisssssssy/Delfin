@@ -57,7 +57,15 @@ public class ConsoleUI {
     }
 
     private void createMember() {
-//        club.createMember(){
+        String name = IO.readln("navn;");
+        int age = Integer.parseInt(IO.readln("Alder: "));
+
+
+
+
+
+
+
 //            String
 
 
@@ -69,6 +77,17 @@ public class ConsoleUI {
     }
 
     private void DeleteMember() {
+        int id = Integer.parseInt(IO.readln("Medlemsnummer på medlemmet der skal slettes: "));
+        Member member = club.findMember(id);
+
+        if (member == null) {
+            IO.println("Der findes intet medlem med nummer " + id);
+            return;
+        }
+
+
+
+
     }
 
     public void KassererMenu(){
