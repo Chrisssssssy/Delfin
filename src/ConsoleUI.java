@@ -66,7 +66,9 @@ public class ConsoleUI {
 
 
 
-//            String
+
+
+
 
 
 
@@ -84,10 +86,6 @@ public class ConsoleUI {
             IO.println("Der findes intet medlem med nummer " + id);
             return;
         }
-
-
-
-
     }
 
     public void KassererMenu(){
