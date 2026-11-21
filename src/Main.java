@@ -17,7 +17,7 @@ void main() {
             club.addLoadedMember(member);
         }
     } catch (IOException | RuntimeException e) {
-        IO.println("Fejl ved indlæsning: " + e.getMessage());
+        IO.println("Fejl ved indlæsning : " + e.getMessage());
         return;
     }
 
