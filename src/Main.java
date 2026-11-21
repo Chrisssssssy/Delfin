@@ -24,4 +24,11 @@ void main() {
     // Start programmet
     ConsoleUI ui = new ConsoleUI(club);
     ui.run();
+
+    try {
+        fileHandler.saveMembers(club.getMembers());
+        IO.println("Medlemmer gemt!");
+    } catch (IOException e) {
+        IO.println("Fejl ved gemning: " + e.getMessage());
+    }
 }
