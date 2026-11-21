@@ -59,7 +59,7 @@ public class ConsoleUI {
     }
 
     private void createMember() {
-        String name = IO.readln("navn;");
+        String name = IO.readln("Navn: ");
         int age = Integer.parseInt(IO.readln("Alder: "));
 
         String swimmingStyle = IO.readln("Svømmestil: ");
@@ -67,12 +67,13 @@ public class ConsoleUI {
 
         //Fra Enums?
         MembershipStatus status = MembershipStatus.valueOf(
-                IO.readln("Medlemskab aktiv/passivt").trim().toUpperCase());
+                IO.readln("Medlemskab aktiv/passivt: ").trim().toUpperCase());
 //
 //        SwimmerType type = SwimmerType.valueOf(
 //                IO.readln("MOTIONIST/KONKURRENCE").trim().toUpperCase());
 
         Member member = club.createMember(name, age, swimmingStyle, swimmingLevel, status);
+        IO.println();
         IO.println("Medlem oprettet: " + member.getName());
         IO.println("Medlemsnummer: " + member.getMemberID());
     }

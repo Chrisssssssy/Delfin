@@ -29,4 +29,11 @@ public class Club {
     public ArrayList<Member> getMembers() {
         return members;
     }
+    public void addLoadedMember(Member member) {
+        members.add(member);
+
+        if (member.getMemberID() >= nextMemberID) {
+            nextMemberID = member.getMemberID() + 1;
+        }
+    }
 }
