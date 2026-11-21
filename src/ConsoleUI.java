@@ -17,6 +17,7 @@ public class ConsoleUI {
                 case 2 -> KassererMenu();
                 case 3 -> TrænerMenu();
                 case 0 -> running = false;
+                default -> IO.println("Ugyldigt valg. Prøv igen");
 
             }
 
@@ -44,6 +45,7 @@ public class ConsoleUI {
                 case 2 -> showMember();
                 case 3 -> DeleteMember();
                 case 0 -> inMenuFormand = false;
+                default -> IO.println("Ugyldigt valg. Prøv igen");
 
             }
         }
@@ -61,13 +63,28 @@ public class ConsoleUI {
     private void createMember() {
         String name = IO.readln("Navn: ");
         int age = readInt("Alder: ");
+        while (age <= 0) {
+            IO.println("Alder skal være større end 0");
+            age = readInt("Alder: ");
+        }
 
-        String swimmingStyle = IO.readln("Svømmestil: ");
-        String swimmingLevel = IO.readln("Svømmeniveau: ");
+        String swimmingStyle = IO.readln("Svømmestil (Crawl/Bryst/Ryg/Butterfly): ");
+        String swimmingLevel = IO.readln("Svømmeniveau (Motionist/Konkurrence): ");
 
         //Fra Enums?
-        MembershipStatus status = MembershipStatus.valueOf(
-                IO.readln("Medlemskab aktiv/passivt: ").trim().toUpperCase());
+        MembershipStatus status;
+
+        while (true) {
+            try {
+                String input = IO.readln("Medlemsstatus (ACTIVE/PASSIVE: ").trim().toUpperCase();
+
+                status = MembershipStatus.valueOf(input);
+                break;
+
+            } catch (IllegalArgumentException e) {
+                IO.println("Ugyldig status. Skriv ACTIVE eller PASSIVE");
+            }
+        }
 //
 //        SwimmerType type = SwimmerType.valueOf(
 //                IO.readln("MOTIONIST/KONKURRENCE").trim().toUpperCase());
@@ -122,6 +139,7 @@ public class ConsoleUI {
                 case 3 -> registerPayment();
                 case 4 -> showMemberFee();
                 case 0 -> inMenuKasserer = false;
+                default -> IO.println("Ugyldigt valg. Prøv igen");
 
             }
         }
@@ -150,7 +168,6 @@ public class ConsoleUI {
             return;
         }
 
-        if(!member.getHasPaid()) {
             IO.println();
             IO.println("Medlem: " + member.getName());
             IO.println("Betalingsstatus: Ikke betalt");
@@ -158,7 +175,7 @@ public class ConsoleUI {
             IO.println();
             IO.println("Medlemmets betaling er nu registreret");
         }
-    }
+
 
     private void showMemberFee() {
         int id = readInt("Indtast medlemsnummer: ");
@@ -179,9 +196,10 @@ public class ConsoleUI {
 
         List<Member> unpaidMembers = paymentManager.getUnpaidMembers(club.getMembers());
 
-        if (unpaidMembers == null) {
+        if (unpaidMembers.isEmpty()) {
             IO.println();
-            IO.println("Ingen medlemmer er i resistance");
+            IO.println("Ingen medlemmer er i restance");
+            return;
         }
         for (Member member: unpaidMembers) {
             IO.println();
@@ -210,6 +228,7 @@ public class ConsoleUI {
             switch (choice){
                 case 1 -> Top5Menu();
                 case 0 -> inMenuTræner = false;
+                default -> IO.println("Ugyldigt valg. Prøv igen");
 
             }
         }
