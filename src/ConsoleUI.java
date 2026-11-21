@@ -84,6 +84,7 @@ public class ConsoleUI {
         }
 
         for (Member member : club.getMembers()){
+            IO.println();
             IO.println("Medlemsnummer: " + member.getMemberID());
             IO.println("Navn: " + member.getName());
             IO.println("Alder: " + member.getAge());
