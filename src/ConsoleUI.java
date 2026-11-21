@@ -83,7 +83,13 @@ public class ConsoleUI {
         }
 
         for (Member member : club.getMembers()){
-            IO.println(member);
+            IO.println("Medlemsnummer: " + member.getMemberID());
+            IO.println("Navn: " + member.getName());
+            IO.println("Alder: " + member.getAge());
+            IO.println("Svømmestil: " + member.getSwimmingStyle());
+            IO.println("Svømmeniveau: " + member.getSwimmingLevel());
+            IO.println("Medlemsstatus: " + member.getStatus());
+            IO.println();
         }
 
     }
