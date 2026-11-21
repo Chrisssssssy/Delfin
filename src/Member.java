@@ -49,5 +49,8 @@ public class Member {
     public boolean getHasPaid() {
         return hasPaid;
     }
+    public void markAsHasPaid() {
+      this.hasPaid = true;
+    }
 
 }

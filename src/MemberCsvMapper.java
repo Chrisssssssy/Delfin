@@ -9,14 +9,16 @@ public class MemberCsvMapper {
       String swimmingStyle = fields[3];
       String swimmingLevel = fields[4];
       MembershipStatus status = MembershipStatus.valueOf(fields[5]);
+      boolean hasPaid = Boolean.parseBoolean(fields[6]);
 
-      return new Member(name, age, memberID, swimmingStyle, swimmingLevel, status);
+      return new Member(name, age, memberID, swimmingStyle, swimmingLevel, status, hasPaid);
 
   }
 
   public String toCsv(Member member){
       return member.getName() + delimiter + member.getAge() +
      delimiter + member.getMemberID() + delimiter + member.getSwimmingStyle() +
-     delimiter + member.getSwimmingLevel() + delimiter + member.getStatus().name();
+     delimiter + member.getSwimmingLevel() + delimiter + member.getStatus().name()
+              + delimiter + member.getHasPaid();
   }
 }
