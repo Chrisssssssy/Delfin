@@ -3,6 +3,10 @@ import java.util.List;
 
 public class PaymentManager {
 
+
+
+
+
     public List<Member> getPaidMembers(List<Member> members) {
 
         List<Member> paidMembers = new ArrayList<>();
