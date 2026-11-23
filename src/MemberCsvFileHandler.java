@@ -35,6 +35,8 @@ public class MemberCsvFileHandler {
     }
 
     public void saveMembers(List<Member> members) throws IOException {
+        Files.createDirectories(path.getParent());
+
         try (BufferedWriter writer = Files.newBufferedWriter(path)) {
             for (Member member : members) {
                 writer.write(mapper.toCsv(member));

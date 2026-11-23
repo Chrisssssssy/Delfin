@@ -1,18 +1,34 @@
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.List;
 void main() {
-Path path = Path.of("members.csv");
-MemberCsvMapper mapper = new MemberCsvMapper();
-MemberCsvFileHandler fileHandler = new MemberCsvFileHandler(path, mapper);
+//Member member = new Member("Peter", 24,9986,"rygsvømning", "Nybegynder");
+//
+//IO.println(member);
 
-List<Member> members;
-try{
-    members = fileHandler.loadMembers();
-    IO.println("Indlæste " + members.size() + "medlemmer" );
 
-} catch (IOException e) {
-    IO.println("Fejl ved indlæsning: " + e.getMessage());
+    Club club = new Club();
 
-}
+    MemberCsvMapper mapper = new MemberCsvMapper();
+
+    MemberCsvFileHandler fileHandler = new MemberCsvFileHandler
+            (Path.of("data", "members.csv"), mapper);
+
+    //Indlæs medlemmer
+    try {
+        for (Member member : fileHandler.loadMembers()) {
+            club.addLoadedMember(member);
+        }
+    } catch (IOException | RuntimeException e) {
+        IO.println("Fejl ved indlæsning : " + e.getMessage());
+        return;
+    }
+
+    // Start programmet
+    ConsoleUI ui = new ConsoleUI(club);
+    ui.run();
+
+    try {
+        fileHandler.saveMembers(club.getMembers());
+        IO.println("Medlemmer gemt!");
+    } catch (IOException e) {
+        IO.println("Fejl ved gemning: " + e.getMessage());
+    }
 }
