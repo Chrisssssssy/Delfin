@@ -7,20 +7,20 @@ public class MemberCsvMapperTest {
     void testToCsv() {
         // arrange
         MemberCsvMapper mapper = new MemberCsvMapper();
-        Member member = new Member("Mikkel", 25, 100, "crawl", "beginner", MembershipStatus.ACTIVE);
+        Member member = new Member("Mikkel", 25, 100, "crawl", "beginner", MembershipStatus.ACTIVE, true);
 
         // act
         String result = mapper.toCsv(member);
 
         // assert
-        assertEquals("Mikkel,25,100,crawl,beginner,ACTIVE", result);
+        assertEquals("Mikkel,25,100,crawl,beginner,ACTIVE,true", result);
     }
 
     @Test
     void testFromCsv() {
         // arrange
         MemberCsvMapper mapper = new MemberCsvMapper();
-        String csvLine = "Mikkel,25,100,crawl,beginner,ACTIVE";
+        String csvLine = "Mikkel,25,100,crawl,beginner,ACTIVE,true";
 
         // act
         Member member = mapper.fromCsv(csvLine);
