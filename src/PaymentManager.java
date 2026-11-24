@@ -3,12 +3,28 @@ import java.util.List;
 
 public class PaymentManager {
 
+    private final List<Integer> paidMemberIds = new ArrayList<>();
+
+    public void markAsPaid(int memberid) {
+        if (!paidMemberIds.contains(memberid)) {
+            paidMemberIds.add(memberid);
+        }
+    }
+
+    public boolean hasPaid(int memberId) {
+        return paidMemberIds.contains(memberId);
+    }
+
+    public boolean hasPaid(Member member) {
+        return hasPaid(member.getMemberID());
+    }
+
     public List<Member> getPaidMembers(List<Member> members) {
 
         List<Member> paidMembers = new ArrayList<>();
 
         for (Member member : members) {
-            if (member.getHasPaid()) {
+            if (hasPaid(member)) {
                 paidMembers.add(member);
             }
         }
@@ -21,7 +37,7 @@ public class PaymentManager {
         List<Member> unpaidMembers = new ArrayList<>();
 
         for (Member member : members) {
-            if (!member.getHasPaid()) {
+            if (!hasPaid(member)) {
                 unpaidMembers.add(member);
             }
         }

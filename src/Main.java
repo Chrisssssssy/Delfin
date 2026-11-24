@@ -6,6 +6,8 @@ void main() {
 
     Club club = new Club();
 
+    PaymentManager paymentManager = new PaymentManager();
+
     MemberCsvMapper mapper = new MemberCsvMapper();
 
     MemberCsvFileHandler fileHandler = new MemberCsvFileHandler
@@ -13,7 +15,7 @@ void main() {
 
     //Indlæs medlemmer
     try {
-        for (Member member : fileHandler.loadMembers()) {
+        for (Member member : fileHandler.loadMembers(paymentManager)) {
             club.addLoadedMember(member);
         }
     } catch (IOException | RuntimeException e) {
@@ -22,11 +24,11 @@ void main() {
     }
 
     // Start programmet
-    ConsoleUI ui = new ConsoleUI(club);
+    ConsoleUI ui = new ConsoleUI(club, paymentManager);
     ui.run();
 
     try {
-        fileHandler.saveMembers(club.getMembers());
+        fileHandler.saveMembers(club.getMembers(), paymentManager);
         IO.println("Medlemmer gemt!");
     } catch (IOException e) {
         IO.println("Fejl ved gemning: " + e.getMessage());

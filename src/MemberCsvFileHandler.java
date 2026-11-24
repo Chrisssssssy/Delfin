@@ -15,7 +15,7 @@ public class MemberCsvFileHandler {
         this.mapper = mapper;
     }
 
-    public List<Member> loadMembers() throws IOException {
+    public List<Member> loadMembers(PaymentManager paymentManager) throws IOException {
         List<Member> members = new ArrayList<>();
 
         if (!Files.exists(path)) {
@@ -27,19 +27,25 @@ public class MemberCsvFileHandler {
             while ((line = reader.readLine()) != null) {
                 if (!line.isBlank()) {
                     Member member = mapper.fromCsv(line);
+                    boolean hasPaid = mapper.getHasPaidFromCsv(line);
                     members.add(member);
+
+                    if (hasPaid) {
+                        paymentManager.markAsPaid(member.getMemberID());
+                    }
                 }
             }
         }
         return members;
     }
 
-    public void saveMembers(List<Member> members) throws IOException {
+    public void saveMembers(List<Member> members, PaymentManager paymentManager) throws IOException {
         Files.createDirectories(path.getParent());
 
         try (BufferedWriter writer = Files.newBufferedWriter(path)) {
             for (Member member : members) {
-                writer.write(mapper.toCsv(member));
+                boolean hasPaid = paymentManager.hasPaid(member);
+                writer.write(mapper.toCsv(member, hasPaid));
                 writer.newLine();
             }
         }

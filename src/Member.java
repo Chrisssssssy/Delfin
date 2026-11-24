@@ -5,17 +5,17 @@ public class Member {
   private String swimmingStyle;
   private String swimmingLevel;
   private MembershipStatus status;
-  private boolean hasPaid;
 
 
-  public Member(String name, int age, int memberID, String swimmingStyle, String swimmingLevel, MembershipStatus status, boolean hasPaid){
+
+  public Member(String name, int age, int memberID, String swimmingStyle, String swimmingLevel, MembershipStatus status){
       this.name = name;
       this.age = age;
       this.memberID = memberID;
       this.swimmingStyle = swimmingStyle;
       this.swimmingLevel = swimmingLevel;
       this.status = status;
-      this.hasPaid = hasPaid;
+
 
   }
 
@@ -45,12 +45,6 @@ public class Member {
 
     public void setStatus(MembershipStatus status) {
       this.status = status;
-    }
-    public boolean getHasPaid() {
-        return hasPaid;
-    }
-    public void markAsHasPaid() {
-      this.hasPaid = true;
     }
 
 }

@@ -2,9 +2,11 @@ import java.util.List;
 
 public class ConsoleUI {
     Club club;
+    PaymentManager paymentManager;
 
-    public ConsoleUI(Club club){
+    public ConsoleUI(Club club, PaymentManager paymentManager){
         this.club = club;
+        this.paymentManager = paymentManager;
     }
 
     public void run (){
@@ -163,7 +165,7 @@ public class ConsoleUI {
             IO.println("Medlemmesnummer kan ikke findes");
             return;
         }
-        if (member.getHasPaid()) {
+        if (paymentManager.hasPaid(member)) {
             IO.println("Medlemmet har allerede betalt kontigent");
             return;
         }
@@ -171,13 +173,14 @@ public class ConsoleUI {
             IO.println();
             IO.println("Medlem: " + member.getName());
             IO.println("Betalingsstatus: Ikke betalt");
-            member.markAsHasPaid();
+            paymentManager.markAsPaid(member.getMemberID());
             IO.println();
             IO.println("Medlemmets betaling er nu registreret");
         }
 
 
     private void showMemberFee() {
+        PaymentManager paymentManager = new PaymentManager();
         int id = readInt("Indtast medlemsnummer: ");
         Member member = club.findMember(id);
 
@@ -185,14 +188,13 @@ public class ConsoleUI {
             IO.println("Medlemsnummeret kan ikke findes");
             return;
         }
-        PaymentManager paymentManager = new PaymentManager();
+
         int fee = paymentManager.calculateFee(member.getAge(), member.getStatus());
         IO.println();
         IO.println("Medlem: " + member.getName() + "\nÅrligt kontigent: " + fee + " kr.");
     }
 
     private void showArrears() {
-        PaymentManager paymentManager = new PaymentManager();
 
         List<Member> unpaidMembers = paymentManager.getUnpaidMembers(club.getMembers());
 
@@ -212,10 +214,8 @@ public class ConsoleUI {
     }
 
     private void showExpectedIncome() {
-        PaymentManager expected = new PaymentManager();
-        List<Member> members = club.getMembers();
 
-        int result = expected.calculateTotal(members);
+        int result = paymentManager.calculateTotal(club.getMembers());
 
         IO.println("Samlede forventet kontigentindtægt " + result + " kr.");
     }
