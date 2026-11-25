@@ -7,9 +7,30 @@ public class PaymentManager {
 
     // Metode til at registrere en betaling
 
+    public void registerPayment(int memberId, int year, int amount) {
+        Payment payment = new Payment(memberId, year, amount);
+        payments.add(payment);
+    }
+
+
 
     // metode til at returnere en liste over betalinger
 
+    public List<Payment> getPayments() {
+        return payments;
+    }
+
+    //Metode til at hente betalinger for et bestemt medlem
+
+    public List<Payment> getPaymentsForMember(int memberId) {
+        List<Payment> result = new ArrayList<>();
+        for (Payment payment : payments) {
+            if (payment.getMemberId() == memberId) {
+                 result.add(payment);
+            }
+        }
+        return result;
+    }
 
     // getter til medlemmer der har betalt
     public List<Member> getPaidMembers(List<Member> members) {
