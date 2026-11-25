@@ -6,7 +6,7 @@ public class PaymentManager {
     public List<Payment> payments = new ArrayList<>();
 
     // Metode til at registrere en betaling
-
+    
 
     // metode til at returnere en liste over betalinger
 
