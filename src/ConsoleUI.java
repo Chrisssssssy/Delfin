@@ -75,20 +75,25 @@ public class ConsoleUI {
         String swimmingStyle = IO.readln("Svømmestil (Crawl/Bryst/Ryg/Butterfly): ");
         String swimmingLevel = IO.readln("Svømmeniveau (Motionist/Konkurrence): ");
 
-        //Fra Enums?
-        MembershipStatus status;
+        // Ændret del, så man ikke skal skrive active eller passive
+        IO.println("Vælg medlemsstatus");
+        IO.println("1. Aktiv");
+        IO.println("2. Passiv");
 
-        while (true) {
-            try {
-                String input = IO.readln("Medlemsstatus (ACTIVE/PASSIVE: ").trim().toUpperCase();
+        int statusChoice = readInt("Indtast valg: ");
 
-                status = MembershipStatus.valueOf(input);
-                break;
-
-            } catch (IllegalArgumentException e) {
-                IO.println("Ugyldig status. Skriv ACTIVE eller PASSIVE");
-            }
+        while (statusChoice != 1 && statusChoice != 2) {
+            IO.println("Ugyldigt valg. Vælge 1 eller 2");
+            statusChoice = readInt("Indtast valg: ");
         }
+        MembershipStatus status;
+        if (statusChoice == 1) {
+            status = MembershipStatus.ACTIVE;
+        } else {
+            status = MembershipStatus.PASSIVE;
+        }
+
+
 //
 //        SwimmerType type = SwimmerType.valueOf(
 //                IO.readln("MOTIONIST/KONKURRENCE").trim().toUpperCase());
@@ -243,7 +248,7 @@ public class ConsoleUI {
 
     private void showInMenuTræner() {
         IO.println();
-        IO.println("1. Vis Top 5");;
+        IO.println("1. Vis Top 5");
         IO.println("0. Tilbage til hovedmenuen");
         IO.println();
     }
