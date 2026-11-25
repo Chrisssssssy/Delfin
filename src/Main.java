@@ -22,9 +22,11 @@ void main() {
     }
 
     // Start programmet
-    ConsoleUI ui = new ConsoleUI(club);
+    ConsoleUI ui = new ConsoleUI(club, fileHandler);
     ui.run();
 
+    // metode der gemmer members når man lukker programmet, kan godt gemmes som en sikkerhed
+    // men er implementeret i console
     try {
         fileHandler.saveMembers(club.getMembers());
         IO.println("Medlemmer gemt!");

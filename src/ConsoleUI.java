@@ -1,10 +1,14 @@
+import java.io.IOException;
 import java.util.List;
 
 public class ConsoleUI {
     Club club;
 
-    public ConsoleUI(Club club){
+    private final MemberCsvFileHandler fileHandler;
+
+    public ConsoleUI(Club club, MemberCsvFileHandler fileHandler){
         this.club = club;
+        this.fileHandler = fileHandler;
     }
 
     public void run (){
@@ -90,6 +94,7 @@ public class ConsoleUI {
 //                IO.readln("MOTIONIST/KONKURRENCE").trim().toUpperCase());
 
         Member member = club.createMember(name, age, swimmingStyle, swimmingLevel, status);
+        saveMembers();
         IO.println();
         IO.println("Medlem oprettet: " + member.getName());
         IO.println("Medlemsnummer: " + member.getMemberID());
@@ -124,6 +129,7 @@ public class ConsoleUI {
         }
 
         club.deleteMember(id);
+        saveMembers();
         IO.println("Medlemmet er slettet: " + member.getName());
         IO.println("Medlemsnummer: " + member.getMemberID());
     }
@@ -172,6 +178,7 @@ public class ConsoleUI {
             IO.println("Medlem: " + member.getName());
             IO.println("Betalingsstatus: Ikke betalt");
             member.markAsHasPaid();
+            saveMembers();
             IO.println();
             IO.println("Medlemmets betaling er nu registreret");
         }
@@ -254,6 +261,15 @@ public class ConsoleUI {
             IO.println("Fejl: Du skal indtaste et tal!");
         }
     }
+    }
+    // metode til at gemme members
+    private void saveMembers() {
+        try {
+            fileHandler.saveMembers(club.getMembers());
+            IO.println("Medlemmer gemt!");
+        } catch (IOException e) {
+            IO.println("Fejl ved gemning: " + e.getMessage());
+        }
     }
 }
 
