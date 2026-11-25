@@ -3,6 +3,15 @@ import java.util.List;
 
 public class PaymentManager {
 
+    public List<Payment> payments = new ArrayList<>();
+
+    // Metode til at registrere en betaling
+
+
+    // metode til at returnere en liste over betalinger
+
+
+    // getter til medlemmer der har betalt
     public List<Member> getPaidMembers(List<Member> members) {
 
         List<Member> paidMembers = new ArrayList<>();
@@ -16,6 +25,7 @@ public class PaymentManager {
         return paidMembers;
     }
 
+    // getter til medlemmer der ikke har betalt
     public List<Member> getUnpaidMembers(List<Member> members) {
 
         List<Member> unpaidMembers = new ArrayList<>();
@@ -29,6 +39,7 @@ public class PaymentManager {
         return unpaidMembers;
     }
 
+    // Metode til at beregne kontingent
     public int calculateFee(int age, MembershipStatus status) {
 
         if (status == MembershipStatus.PASSIVE) {
@@ -46,6 +57,7 @@ public class PaymentManager {
         return 1600;
     }
 
+    // metode til at beregne den forventede total af kontingent
     public int calculateTotal(List<Member> members) {
         int total = 0;
 
