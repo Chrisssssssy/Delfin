@@ -227,6 +227,8 @@ public class ConsoleUI {
             int choice = readInt("Indtast valg ");
             switch (choice){
                 case 1 -> Top5Menu();
+                case 2 -> competitionSearch();
+                case 3 -> competitionAdd();
                 case 0 -> inMenuTræner = false;
                 default -> IO.println("Ugyldigt valg. Prøv igen");
 
@@ -237,12 +239,22 @@ public class ConsoleUI {
     private void showInMenuTræner() {
         IO.println();
         IO.println("1. Vis Top 5");;
+        IO.println("2. Søg efter Konkurranse");
+        IO.println("3. Tilføj konkurranse");
         IO.println("0. Tilbage til hovedmenuen");
         IO.println();
     }
 
     private void Top5Menu() {
     }
+
+    private void competitionAdd() {
+    }
+
+    private void competitionSearch() {
+    }
+
+
 
     //Metode der erstater Integer.parseInt(IO.readln()) for at lave en mere generel at fange andet end tal
     private int readInt(String prompt) {
