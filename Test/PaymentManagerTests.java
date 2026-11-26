@@ -80,12 +80,9 @@ public class PaymentManagerTests {
     void testCalculateTotalWithThreeMembers() {
         //Arrange
         PaymentManager calculator = new PaymentManager();
-        Member member1 = new Member("Hans", 17, 13,
-                "Bryst", "Junior", MembershipStatus.ACTIVE, true);
-        Member member2 = new Member("Kirsten", 35, 11,
-                "Slow", "Adult", MembershipStatus.ACTIVE, true);
-        Member member3 = new Member("Niels", 70, 12,
-                "Bryst", "Old Boys", MembershipStatus.PASSIVE, true);
+        Member member1 = new Member("Hans", 17, 13, "Junior", MembershipStatus.ACTIVE, true);
+        Member member2 = new Member("Kirsten", 35, 11, "Adult", MembershipStatus.ACTIVE, true);
+        Member member3 = new Member("Niels", 70, 12, "Old Boys", MembershipStatus.PASSIVE, true);
 
         List<Member> members = new ArrayList<>(List.of(member1, member2, member3));
 

@@ -2,17 +2,15 @@ public class Member {
   private String name;
   private int age;
   private int memberID;
-  private String swimmingStyle;
   private String swimmingLevel;
   private MembershipStatus status;
   private boolean hasPaid;
 
 
-  public Member(String name, int age, int memberID, String swimmingStyle, String swimmingLevel, MembershipStatus status, boolean hasPaid){
+  public Member(String name, int age, int memberID, String swimmingLevel, MembershipStatus status, boolean hasPaid){
       this.name = name;
       this.age = age;
       this.memberID = memberID;
-      this.swimmingStyle = swimmingStyle;
       this.swimmingLevel = swimmingLevel;
       this.status = status;
       this.hasPaid = hasPaid;
@@ -29,10 +27,6 @@ public class Member {
 
     public int getMemberID() {
         return memberID;
-    }
-
-    public String getSwimmingStyle() {
-        return swimmingStyle;
     }
 
     public String getSwimmingLevel() {

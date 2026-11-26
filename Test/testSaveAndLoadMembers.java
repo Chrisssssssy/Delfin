@@ -11,7 +11,7 @@ public class testSaveAndLoadMembers {
         MemberCsvMapper mapper = new MemberCsvMapper();
         MemberCsvFileHandler handler = new MemberCsvFileHandler(file, mapper);
 
-        Member member = new Member("Mikkel", 25, 100, "crawl", "beginner", MembershipStatus.ACTIVE, true);
+        Member member = new Member("Mikkel", 25, 100, "beginner", MembershipStatus.ACTIVE, true);
         List<Member> membersToSave = List.of(member);
 
         // act
