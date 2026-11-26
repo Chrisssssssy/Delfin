@@ -20,6 +20,7 @@ public class ConsoleUI {
                 case 1 -> FormandMenu();
                 case 2 -> KassererMenu();
                 case 3 -> TrænerMenu();
+                case 4 -> MemberMenu();
                 case 0 -> running = false;
                 default -> IO.println("Ugyldigt valg. Prøv igen");
 
@@ -33,6 +34,7 @@ public class ConsoleUI {
         IO.println("1. Formand");
         IO.println("2. Kasserer");
         IO.println("3. Træner");
+        IO.println("4. Medlem");
         IO.println("0. Afslut");
         IO.println();
 
@@ -75,24 +77,8 @@ public class ConsoleUI {
         String swimmingStyle = IO.readln("Svømmestil (Crawl/Bryst/Ryg/Butterfly): ");
         String swimmingLevel = IO.readln("Svømmeniveau (Motionist/Konkurrence): ");
 
-        // Ændret del, så man ikke skal skrive active eller passive
-        IO.println("Vælg medlemsstatus");
-        IO.println("1. Aktiv");
-        IO.println("2. Passiv");
-
-        int statusChoice = readInt("Indtast valg: ");
-
-        while (statusChoice != 1 && statusChoice != 2) {
-            IO.println("Ugyldigt valg. Vælge 1 eller 2");
-            statusChoice = readInt("Indtast valg: ");
-        }
-        MembershipStatus status;
-        if (statusChoice == 1) {
-            status = MembershipStatus.ACTIVE;
-        } else {
-            status = MembershipStatus.PASSIVE;
-        }
-
+        // Membershipstatus oprettes nu i en anden metode da, den også skal bruges i medlemsmenu'
+        MembershipStatus status = chooseMembershipStatus();
 
 //
 //        SwimmerType type = SwimmerType.valueOf(
@@ -254,6 +240,85 @@ public class ConsoleUI {
     }
 
     private void Top5Menu() {
+    }
+
+    private void MemberMenu() {
+        int id = readInt("Indtast medlemsnummer: ");
+        Member member = club.findMember(id);
+
+        if (member == null) {
+            IO.println("Medlemsnummer kan ikke findes");
+            return;
+        }
+        IO.println();
+        IO.println("Velkommen til " + member.getName());
+        IO.println();
+
+        boolean inMenuMember = true;
+        while (inMenuMember) {
+            showInMenuMember();
+
+            int choice = readInt("Indtast valg: ");
+            IO.println();
+
+            switch (choice) {
+                case 1 -> showStatusForMember(member);
+                case 2 -> changeMembershipStatus(member);
+                case 0 -> inMenuMember = false;
+                default -> IO.println("Ugyldigt valg. Prøv igen.");
+            }
+
+        }
+
+    }
+
+    private void showInMenuMember() {
+        IO.println("1. Se medlemsstatus");
+        IO.println("2. Skift medlemsstatus");
+        IO.println("0. Tilbage til hovedmenuen");
+        IO.println();
+    }
+
+    private void showStatusForMember(Member member) {
+        IO.println("Nuværende status: " + member.getStatus());
+        IO.println();
+    }
+
+    private void changeMembershipStatus(Member member) {
+        MembershipStatus newStatus = chooseMembershipStatus();
+
+        if (member.getStatus() == newStatus) {
+            IO.println("Du har allerede denne medlemsstatus.");
+            IO.println();
+            return;
+        }
+        member.setStatus(newStatus);
+        saveMembers();
+
+        IO.println();
+        IO.println("Din medlemsstatus er nu ændret til: " + member.getStatus());
+        IO.println();
+    }
+
+    //Metode som bliver brugt til at sætte medlemsstatus
+    private MembershipStatus chooseMembershipStatus() {
+        IO.println("Vælg medlemsstatus");
+        IO.println("1. Aktiv");
+        IO.println("2. Passiv");
+
+        int statusChoice = readInt("Indtast valg: ");
+
+        while (statusChoice != 1 && statusChoice != 2) {
+            IO.println("Ugyldigt valg. Vælge 1 eller 2");
+            statusChoice = readInt("Indtast valg: ");
+        }
+        MembershipStatus status;
+        if (statusChoice == 1) {
+            status = MembershipStatus.ACTIVE;
+        } else {
+            status = MembershipStatus.PASSIVE;
+        }
+        return status;
     }
 
     //Metode der erstater Integer.parseInt(IO.readln()) for at lave en mere generel at fange andet end tal
