@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.time.LocalDate;
+
 
 public class Club {
     private ArrayList<Member>members = new ArrayList<>();
@@ -37,4 +39,33 @@ public class Club {
             nextMemberID = member.getMemberID() + 1;
         }
     }
+
+    private ArrayList<Result>results = new ArrayList<>();
+    public Result createResult(Member member, Discipline discipline, Competition competition, int placering){
+        Result result = new Result(member, discipline, competition, placering);
+        results.add(result);
+        return result;
+    }
+
+
+
+    public Result findResult(Member member){
+        for (Result result : results) {
+            if (result.getMember() == member){
+                return result;
+            }
+        }
+        return null;
+    }
+    public boolean deleteResult(Member member) {
+        return results.removeIf(result -> result.getMember().equals(member));
+    }
+
+    public ArrayList<Result> getResults() {
+        return results;
+    }
+    public void addLoadedResult(Result result) {
+        results.add(result);
+    }
+
 }

@@ -1,4 +1,4 @@
-import java.time.LocalDate;
+
 
 public class Result {
     private final Member member;
@@ -13,5 +13,19 @@ public class Result {
         this.placering = placering;
     }
 
+    public Member getMember() {
+        return member;
+    }
 
+    public Discipline getDiscipline() {
+        return discipline;
+    }
+
+    public Competition getCompetition() {
+        return competition;
+    }
+
+    public int getPlacering() {
+        return placering;
+    }
 }
