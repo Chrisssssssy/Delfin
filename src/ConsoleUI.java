@@ -16,11 +16,12 @@ public class ConsoleUI {
         while (running){
             showMainMenu();
             int choice = readInt("Indtast valg ");
+            IO.println();
             switch (choice){
                 case 1 -> FormandMenu();
                 case 2 -> KassererMenu();
                 case 3 -> TrænerMenu();
-                case 4 -> MemberMenu();
+                case 4 -> introMemberMenu();
                 case 0 -> running = false;
                 default -> IO.println("Ugyldigt valg. Prøv igen");
 
@@ -242,7 +243,54 @@ public class ConsoleUI {
     private void Top5Menu() {
     }
 
-    private void MemberMenu() {
+    private void introMemberMenu() {
+        boolean inIntroMemberMenu = true;
+        while (inIntroMemberMenu) {
+            showInIntroMemberMenu();
+
+            int choiceIntro = readInt("Indtast valg: ");
+            IO.println();
+
+            switch (choiceIntro) {
+                case 1 -> createMemberByMember();
+                case 2 -> memberMenu();
+                case 0 -> inIntroMemberMenu = false;
+                default -> IO.println("Ugyldigt valg. Prøv igen.");
+            }
+        }
+    }
+
+    private void showInIntroMemberMenu() {
+        IO.println("1. Opret dig som medlem");
+        IO.println("2. Login som medlem");
+        IO.println("0. Tilbage til hovedmenuen");
+        IO.println();
+    }
+
+    private void createMemberByMember() {
+        String name = IO.readln("Navn: ");
+        int age = readInt("Alder: ");
+        while (age <= 0) {
+            IO.println("Alder skal være større end 0");
+            age = readInt("Alder: ");
+        }
+
+        String swimmingStyle = IO.readln("Svømmestil (Crawl/Bryst/Ryg/Butterfly): ");
+        String swimmingLevel = IO.readln("Svømmeniveau (Motionist/Konkurrence): ");
+
+        // Membershipstatus oprettes nu i en anden metode da, den også skal bruges i medlemsmenu'
+        MembershipStatus status = chooseMembershipStatus();
+
+        Member member = club.createMember(name, age, swimmingStyle, swimmingLevel, status);
+        saveMembers();
+        IO.println();
+        IO.println("Du er nu oprettet som medlem: " + member.getName());
+        IO.println("Dit medlemsnummer er: " + member.getMemberID());
+        IO.println();
+    }
+
+    private void memberMenu() {
+
         int id = readInt("Indtast medlemsnummer: ");
         Member member = club.findMember(id);
 
@@ -272,10 +320,11 @@ public class ConsoleUI {
 
     }
 
+
     private void showInMenuMember() {
         IO.println("1. Se medlemsstatus");
         IO.println("2. Skift medlemsstatus");
-        IO.println("0. Tilbage til hovedmenuen");
+        IO.println("0. Gå tilbage");
         IO.println();
     }
 
